@@ -1,11 +1,11 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
+import { router } from "./Routes/routes";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl md:text-6xl bg-blue-600 text-white py-5 text-center font-bold cursor-pointer hover:bg-blue-500">
-        Lens Touch
-      </h1>
+    <div>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
