@@ -1,10 +1,21 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Signup = () => {
-  const { createUser, addNameAndDisplayImage } = useContext(AuthContext);
+  const { createUser, addNameAndDisplayImage, signInWithGoogle } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const googleLoginHandler = () => {
+    signInWithGoogle()
+      .then(result => {
+        alert(`${result.user.displayName} logged in`);
+        navigate("/");
+      })
+      .catch(error => console.error(error));
+  };
 
   const submitHandler = event => {
     event.preventDefault();
@@ -102,7 +113,10 @@ const Signup = () => {
           className="mt-5"
         ></div>
 
-        <button className="border border-red-600 text-red-600 hover:bg-red-600 hover:text-white ease-in duration-300 font-semibold py-2 px-3 rounded block mx-auto mt-5">
+        <button
+          onClick={googleLoginHandler}
+          className="border border-red-600 text-red-600 hover:bg-red-600 hover:text-white ease-in duration-300 font-semibold py-2 px-3 rounded block mx-auto mt-5"
+        >
           <FaGoogle className="inline-block mr-2 mb-1"></FaGoogle>
           Sign up with Google
         </button>
