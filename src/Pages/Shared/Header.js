@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
 
+  // nav items
   const navItems = (
     <>
       <li className="mx-2">
@@ -16,13 +17,21 @@ const Header = () => {
     </>
   );
 
+  // logout handler
+  const logOutHandler = () => {
+    logOutUser()
+      .then(() => alert("user logged out"))
+      .catch(error => console.error(error));
+  };
+
+  // user profile or login button
   const userProfile = (
     <>
-      {user.email ? (
+      {user?.email ? (
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" alt="user"></img>
+              <img src={user.photoURL} alt="user"></img>
             </div>
           </label>
           <ul
@@ -30,14 +39,11 @@ const Header = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <p className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </p>
+              <p className="justify-between">{user.displayName}</p>
             </li>
 
             <li>
-              <button>Logout</button>
+              <button onClick={logOutHandler}>Logout</button>
             </li>
           </ul>
         </div>
