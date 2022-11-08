@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
+
   const navItems = (
     <>
       <li className="mx-2">
