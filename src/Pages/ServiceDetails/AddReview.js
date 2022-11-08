@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddReview = ({ user }) => {
+const AddReview = ({ user, submitReviewHandler }) => {
   return (
     <div className="w-10/12 mt-14 mb-10 mx-auto flex flex-col md:flex-row justify-around">
       <div className="w-11 md:w-32" title={user.displayName}>
@@ -10,7 +10,10 @@ const AddReview = ({ user }) => {
           alt="user"
         />
       </div>
-      <form className="flex flex-col md:flex-row items-center">
+      <form
+        onSubmit={event => submitReviewHandler(event)}
+        className="flex flex-col md:flex-row items-center"
+      >
         <textarea
           className="textarea textarea-primary md:mt-0 mt-5 md:ml-5 w-full md:max-w-lg text-xl md:text-2xl"
           placeholder="Add your Review"

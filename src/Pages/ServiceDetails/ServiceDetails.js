@@ -6,9 +6,35 @@ import AddReview from "./AddReview";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
-  const { title, image, description, price, rating, lists } = service;
+  const { _id, title, image, description, price, rating, lists } = service;
 
   const { user } = useContext(AuthContext);
+
+  const submitReviewHandler = event => {
+    event.preventDefault();
+
+    const reviewObj = {
+      text: event.target.review.value,
+      user_email: user.email,
+      user_name: user.displayName,
+      service_id: _id,
+    };
+
+    // post review
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviewObj),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          alert("review added successfully");
+        }
+      });
+  };
 
   return (
     <div className="w-10/12 mt-14 mb-10 mx-auto">
@@ -40,10 +66,13 @@ const ServiceDetails = () => {
         </h2>
 
         {user?.uid && user?.email ? (
-          <AddReview user={user}></AddReview>
+          <AddReview
+            user={user}
+            submitReviewHandler={submitReviewHandler}
+          ></AddReview>
         ) : (
           <div className="text-center my-5">
-            <h1 className="mb-3 text-xl">To add a review you have to log in</h1>
+            <h1 className="mb-3 text-xl">Please login to add a review</h1>
             <Link to="/login" className="btn btn-primary btn-outline font-bold">
               Login to add a review
             </Link>
