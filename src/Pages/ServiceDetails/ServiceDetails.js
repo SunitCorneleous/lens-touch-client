@@ -1,14 +1,17 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import { BsFillPatchCheckFill } from "react-icons/bs";
+import { AuthContext } from "../../contexts/AuthProvider";
+import AddReview from "./AddReview";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
-
   const { title, image, description, price, rating, lists } = service;
 
+  const { user } = useContext(AuthContext);
+
   return (
-    <div className="w-10/12 mt-16 mb-10 mx-auto">
+    <div className="w-10/12 mt-14 mb-10 mx-auto">
       <h2 className="text-3xl md:text-4xl font-semibold">Service Details</h2>
       <div className="mt-8 flex justify-between flex-col md:flex-row w-full">
         <img src={image} className="w-full md:w-3/5 rounded-lg" alt="service" />
@@ -30,6 +33,22 @@ const ServiceDetails = () => {
           </ul>
           <button className="btn btn-primary mt-8">Get this service</button>
         </div>
+      </div>
+      <div className="mt-8">
+        <h2 className="text-3xl text-center md:text-4xl font-semibold">
+          Service Review
+        </h2>
+
+        {user?.uid && user?.email ? (
+          <AddReview user={user}></AddReview>
+        ) : (
+          <div className="text-center my-5">
+            <h1 className="mb-3 text-xl">To add a review you have to log in</h1>
+            <Link to="/login" className="btn btn-primary btn-outline font-bold">
+              Login to add a review
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

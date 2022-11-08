@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user, logOutUser, setUser } = useContext(AuthContext);
 
   // nav items
   const navItems = (
@@ -20,7 +20,10 @@ const Header = () => {
   // logout handler
   const logOutHandler = () => {
     logOutUser()
-      .then(() => alert("user logged out"))
+      .then(() => {
+        alert("user logged out");
+        setUser({});
+      })
       .catch(error => console.error(error));
   };
 
