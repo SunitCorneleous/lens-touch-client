@@ -10,9 +10,6 @@ const Header = () => {
       <li className="mx-2">
         <Link to="/blogs">Blogs</Link>
       </li>
-      <li className="mx-2">
-        <button>Profile</button>
-      </li>
     </>
   );
 
