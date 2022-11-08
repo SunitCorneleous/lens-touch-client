@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -7,8 +7,17 @@ import AddReview from "./AddReview";
 const ServiceDetails = () => {
   const service = useLoaderData();
   const { _id, title, image, description, price, rating, lists } = service;
+  const [reviews, setReviews] = useState();
 
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews/${_id}`)
+      .then(res => res.json())
+      .then(data => setReviews(data));
+  }, [_id]);
+
+  console.log(reviews);
 
   const submitReviewHandler = event => {
     event.preventDefault();
