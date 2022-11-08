@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Signup = () => {
+  const { createUser, addNameAndDisplayImage } = useContext(AuthContext);
+
   const submitHandler = event => {
     event.preventDefault();
+
+    const form = event.target;
+    const name = form.name.value;
+    const picture = form.picture.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then(result => {
+        const profile = {
+          displayName: name,
+          photoURL: picture,
+        };
+
+        addNameAndDisplayImage(profile)
+          .then(() => console.log("name and profile picture added"))
+          .catch(error => console.error(error));
+
+        form.reset();
+      })
+      .catch(error => console.error(error));
   };
 
   return (
