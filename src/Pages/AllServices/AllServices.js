@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useTitle from "../../hooks/useTitle";
 
 import ServiceCard from "../Shared/ServiceCard";
 import Spinner from "../Shared/Spinner";
@@ -6,6 +7,9 @@ import Spinner from "../Shared/Spinner";
 const AllServices = () => {
   const [services, setServices] = useState(true);
   const [loading, setLoading] = useState(true);
+
+  // change title of route
+  useTitle("All Services");
 
   useEffect(() => {
     fetch("http://localhost:5000/services")

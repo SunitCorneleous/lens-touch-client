@@ -1,7 +1,7 @@
 import React from "react";
 
 export const loadingSpinner = (
-  <svg class="h-6 w-6 animate-spin stroke-white" viewBox="0 0 256 256">
+  <svg className="h-6 w-6 animate-spin stroke-white" viewBox="0 0 256 256">
     <line
       x1="128"
       y1="32"

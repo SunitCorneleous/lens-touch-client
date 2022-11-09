@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
 import { loadingSpinner } from "../Shared/Spinner";
+import useTitle from "./../../hooks/useTitle";
 
 const Login = () => {
   const { loginUser, signInWithGoogle } = useContext(AuthContext);
@@ -12,6 +13,9 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+
+  // change title of route
+  useTitle("Login");
 
   const googleLoginHandler = () => {
     setLoading(true);

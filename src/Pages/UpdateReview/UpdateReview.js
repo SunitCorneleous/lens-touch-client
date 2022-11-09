@@ -1,12 +1,16 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import useTitle from "../../hooks/useTitle";
 
 const UpdateReview = () => {
   const review = useLoaderData();
   const { _id, user_email, user_name, service_id, user_image, service_name } =
     review;
   const navigate = useNavigate();
+
+  // change title of route
+  useTitle("Update Review");
 
   const updateReviewHandler = event => {
     event.preventDefault();

@@ -5,13 +5,16 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import AddReview from "./AddReview";
 import ReviewCard from "./ReviewCard";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
   const { _id, title, image, description, price, rating, lists } = service;
   const [reviews, setReviews] = useState();
-
   const { user } = useContext(AuthContext);
+
+  // change title of route
+  useTitle(title);
 
   // get reviews by serviceID
   useEffect(() => {

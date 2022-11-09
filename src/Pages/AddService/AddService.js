@@ -1,7 +1,11 @@
 import React from "react";
 import toast from "react-hot-toast";
+import useTitle from "../../hooks/useTitle";
 
 const AddService = () => {
+  // change title of route
+  useTitle("Add Service");
+
   const addServiceHandler = event => {
     event.preventDefault();
 
