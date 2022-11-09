@@ -3,6 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import { AuthContext } from "../../contexts/AuthProvider";
 import AddReview from "./AddReview";
+import ReviewCard from "./ReviewCard";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
@@ -11,6 +12,7 @@ const ServiceDetails = () => {
 
   const { user } = useContext(AuthContext);
 
+  // get reviews by serviceID
   useEffect(() => {
     fetch(`http://localhost:5000/reviews/${_id}`)
       .then(res => res.json())
@@ -27,6 +29,7 @@ const ServiceDetails = () => {
       user_email: user.email,
       user_name: user.displayName,
       service_id: _id,
+      user_image: user.photoURL,
     };
 
     // post review
@@ -39,14 +42,22 @@ const ServiceDetails = () => {
     })
       .then(res => res.json())
       .then(data => {
-        if (data) {
+        if (data.acknowledged) {
+          reviewObj._id = data.insertedId;
+
+          const newReviews = [reviewObj, ...reviews];
+
+          setReviews(newReviews);
+
           alert("review added successfully");
+          event.target.reset();
         }
       });
   };
 
   return (
     <div className="w-10/12 mt-14 mb-10 mx-auto">
+      {/* ALL SERVICES SECTION */}
       <h2 className="text-3xl md:text-4xl font-semibold">Service Details</h2>
       <div className="mt-8 flex justify-between flex-col md:flex-row w-full">
         <img src={image} className="w-full md:w-3/5 rounded-lg" alt="service" />
@@ -69,11 +80,12 @@ const ServiceDetails = () => {
           <button className="btn btn-primary mt-8">Get this service</button>
         </div>
       </div>
+      {/* REVIEW SECTION */}
       <div className="mt-8">
         <h2 className="text-3xl text-center md:text-4xl font-semibold">
           Service Review
         </h2>
-
+        {/* ADD REVIEW */}
         {user?.uid && user?.email ? (
           <AddReview
             user={user}
@@ -87,6 +99,15 @@ const ServiceDetails = () => {
             </Link>
           </div>
         )}
+        {/* REVIEW FROM OTHERS */}
+        <div className="mt-16">
+          <h3 className="text-center my-4 text-3xl font-semibold">
+            Reviews of this service from my customers
+          </h3>
+          {reviews?.map(review => (
+            <ReviewCard key={review._id} review={review}></ReviewCard>
+          ))}
+        </div>
       </div>
     </div>
   );
