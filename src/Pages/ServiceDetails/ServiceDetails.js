@@ -18,7 +18,7 @@ const ServiceDetails = () => {
 
   // get reviews by serviceID
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${_id}`)
+    fetch(`https://lens-touch-server.vercel.app/reviews/${_id}`)
       .then(res => res.json())
       .then(data => setReviews(data));
   }, [_id]);
@@ -36,7 +36,7 @@ const ServiceDetails = () => {
     };
 
     // post review
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://lens-touch-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

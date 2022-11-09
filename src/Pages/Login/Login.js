@@ -28,7 +28,7 @@ const Login = () => {
         setLoading(false);
 
         // get token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://lens-touch-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -74,7 +74,7 @@ const Login = () => {
         setLoading(false);
 
         // get token
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://lens-touch-server.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",

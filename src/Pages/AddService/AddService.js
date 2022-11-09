@@ -38,7 +38,7 @@ const AddService = () => {
       lists: lists,
     };
 
-    fetch("http://localhost:5000/services", {
+    fetch("https://lens-touch-server.vercel.app/services", {
       method: "POST",
       headers: {
         "content-type": "application/json",

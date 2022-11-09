@@ -12,7 +12,7 @@ const MyReviews = () => {
   useTitle("My Reviews");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myreviews/${user.email}`, {
+    fetch(`https://lens-touch-server.vercel.app/myreviews/${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("lens-touch-token")}`,
       },
@@ -31,7 +31,7 @@ const MyReviews = () => {
     const confirmation = window.confirm("Are you sure you want to delete?");
 
     if (confirmation) {
-      fetch(`http://localhost:5000/reviews/${review_id}`, {
+      fetch(`https://lens-touch-server.vercel.app/reviews/${review_id}`, {
         method: "DELETE",
       })
         .then(res => res.json())
