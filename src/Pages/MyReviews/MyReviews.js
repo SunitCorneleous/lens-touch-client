@@ -4,14 +4,23 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import MyReviewsCard from "./MyReviewsCard";
 
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myreviews/${user.email}`)
-      .then(res => res.json())
+    fetch(`http://localhost:5000/myreviews/${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("lens-touch-token")}`,
+      },
+    })
+      .then(res => {
+        if (res.status === 401 || res.status === 403) {
+          logOutUser();
+        }
+        return res.json();
+      })
       .then(data => setReviews(data));
-  }, [user.email]);
+  }, [user.email, logOutUser]);
 
   // delete review
   const deleteHandler = review_id => {

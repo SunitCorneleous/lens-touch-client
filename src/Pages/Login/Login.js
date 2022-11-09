@@ -13,6 +13,26 @@ const Login = () => {
   const googleLoginHandler = () => {
     signInWithGoogle()
       .then(result => {
+        const currentUser = {
+          email: result.user.email,
+        };
+
+        // get token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then(res => res.json())
+          .then(data => {
+            // store access token
+            localStorage.setItem("lens-touch-token", data.token);
+            navigate(from, { replace: true });
+          });
+
+        // success toast
         const notify = () =>
           toast.success(`${result.user.displayName} logged in`);
 
@@ -35,6 +55,25 @@ const Login = () => {
 
     loginUser(email, password)
       .then(result => {
+        const currentUser = {
+          email: result.user.email,
+        };
+
+        // get token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then(res => res.json())
+          .then(data => {
+            // store access token
+            localStorage.setItem("lens-touch-token", data.token);
+            navigate(from, { replace: true });
+          });
+
         // success toast
         const notify = () =>
           toast.success(`${result.user.displayName} logged in`);
