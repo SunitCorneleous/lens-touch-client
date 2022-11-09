@@ -30,6 +30,7 @@ const ServiceDetails = () => {
       user_name: user.displayName,
       service_id: _id,
       user_image: user.photoURL,
+      service_name: title,
     };
 
     // post review

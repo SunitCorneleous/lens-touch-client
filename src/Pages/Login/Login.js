@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
   const { loginUser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const googleLoginHandler = () => {
     signInWithGoogle()
@@ -26,7 +28,7 @@ const Login = () => {
     loginUser(email, password)
       .then(result => {
         alert(`${result.user.displayName} logged in`);
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch(error => console.error(error));
   };
