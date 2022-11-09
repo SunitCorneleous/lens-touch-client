@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const MyReviewsCard = ({ review, deleteHandler }) => {
   return (
@@ -15,9 +16,12 @@ const MyReviewsCard = ({ review, deleteHandler }) => {
       </div>
       <div className="md:w-1/3 flex flex-col md:flex-row justify-around">
         {/* edit review */}
-        <button className="bg-green-500 p-4 rounded-full border-4 border-green-900 md:mx-2">
+        <Link
+          to={`/updatereview/${review._id}`}
+          className="bg-green-500 p-4 rounded-full border-4 border-green-900 md:mx-2"
+        >
           <FaRegEdit className="text-xl md:text-4xl ml-1 text-white hover:text-green-700"></FaRegEdit>
-        </button>
+        </Link>
         {/* delete review */}
         <button
           onClick={() => deleteHandler(review._id)}
