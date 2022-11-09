@@ -19,8 +19,6 @@ const ServiceDetails = () => {
       .then(data => setReviews(data));
   }, [_id]);
 
-  console.log(reviews);
-
   const submitReviewHandler = event => {
     event.preventDefault();
 
