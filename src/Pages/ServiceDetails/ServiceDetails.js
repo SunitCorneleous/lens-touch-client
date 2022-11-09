@@ -4,6 +4,7 @@ import { BsFillPatchCheckFill } from "react-icons/bs";
 import { AuthContext } from "../../contexts/AuthProvider";
 import AddReview from "./AddReview";
 import ReviewCard from "./ReviewCard";
+import toast from "react-hot-toast";
 
 const ServiceDetails = () => {
   const service = useLoaderData();
@@ -48,7 +49,11 @@ const ServiceDetails = () => {
 
           setReviews(newReviews);
 
-          alert("review added successfully");
+          // success toast
+          const notify = () => toast.success(`Review added successfully`);
+          notify();
+
+          // reset form
           event.target.reset();
         }
       });

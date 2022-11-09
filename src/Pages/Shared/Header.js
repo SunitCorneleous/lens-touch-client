@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
@@ -31,9 +32,14 @@ const Header = () => {
   const logOutHandler = () => {
     logOutUser()
       .then(() => {
-        alert("user logged out");
+        // success toast
+        const notify = () => toast.success(`logged out successfully`);
+        notify();
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        const notify = () => toast.error(`log out failed, error: ${error}`);
+        notify();
+      });
   };
 
   // user profile or login button

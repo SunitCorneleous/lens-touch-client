@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
 import MyReviewsCard from "./MyReviewsCard";
 
@@ -29,8 +30,15 @@ const MyReviews = () => {
             setReviews(remaining);
 
             // confirmation toast
-            alert("review deleted");
+            // success toast
+            const notify = () => toast.success(`Review deleted successfully`);
+            notify();
           }
+        })
+        .catch(error => {
+          const notify = () =>
+            toast.error(`Failed to delete, error: ${error?.message}`);
+          notify();
         });
     }
   };

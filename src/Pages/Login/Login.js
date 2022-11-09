@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { loginUser, signInWithGoogle } = useContext(AuthContext);
@@ -12,10 +13,17 @@ const Login = () => {
   const googleLoginHandler = () => {
     signInWithGoogle()
       .then(result => {
-        alert(`${result.user.displayName} logged in`);
+        const notify = () =>
+          toast.success(`${result.user.displayName} logged in`);
+
+        notify();
+
         navigate("/");
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        const notify = () => toast.error(`login failed, error: ${error}`);
+        notify();
+      });
   };
 
   const submitHandler = event => {
@@ -27,10 +35,18 @@ const Login = () => {
 
     loginUser(email, password)
       .then(result => {
-        alert(`${result.user.displayName} logged in`);
+        // success toast
+        const notify = () =>
+          toast.success(`${result.user.displayName} logged in`);
+        notify();
+
+        // navigate to right route
         navigate(from, { replace: true });
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        const notify = () => toast.error(`login failed, error: ${error}`);
+        notify();
+      });
   };
 
   return (

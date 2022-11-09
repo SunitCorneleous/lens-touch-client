@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthProvider";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const { createUser, addNameAndDisplayImage, signInWithGoogle } =
@@ -11,7 +12,10 @@ const Signup = () => {
   const googleLoginHandler = () => {
     signInWithGoogle()
       .then(result => {
-        alert(`${result.user.displayName} logged in`);
+        // success toast
+        const notify = () =>
+          toast.success(`${result.user.displayName} logged in`);
+        notify();
         navigate("/");
       })
       .catch(error => console.error(error));
