@@ -2,7 +2,7 @@ import React from "react";
 
 const ReviewCard = ({ review }) => {
   return (
-    <div className="flex flex-col md:flex-row justify-around w-10/12 mx-auto my-5 shadow px-4 py-5 rounded-xl bg-base-200">
+    <div className="flex flex-col md:flex-row justify-around w-10/12 md:w-8/12 mx-auto my-5 shadow px-4 py-5 rounded-xl bg-base-200">
       <div className="flex flex-col items-center">
         <img
           className="w-14 md:w-24 border-black border rounded-full"

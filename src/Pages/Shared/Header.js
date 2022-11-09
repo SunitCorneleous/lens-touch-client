@@ -16,10 +16,10 @@ const Header = () => {
       </li>
       {user?.uid && (
         <>
-          <li>
+          <li className="mx-2">
             <Link to="/myreviews">My Reviews</Link>
           </li>
-          <li>
+          <li className="mx-2">
             <Link to="/addservice">Add Service</Link>
           </li>
         </>

@@ -2,9 +2,9 @@ import React from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
 
-const MyReviewsCard = ({ review }) => {
+const MyReviewsCard = ({ review, deleteHandler }) => {
   return (
-    <div className="p-5 my-5 rounded-lg shadow bg-base-200 flex justify-between items-center w-full mx-auto md:w-2/3">
+    <div className="p-7 my-5 rounded-lg shadow bg-base-200 flex justify-between items-center w-full mx-auto md:w-2/3">
       <div className="md:w-3/5">
         <h3 className="md:text-xl">Review:</h3>
         <p className="text-xl md:text-3xl font-medium">{review.text}</p>
@@ -19,7 +19,10 @@ const MyReviewsCard = ({ review }) => {
           <FaRegEdit className="text-xl md:text-4xl ml-1 text-white hover:text-green-700"></FaRegEdit>
         </button>
         {/* delete review */}
-        <button className="bg-red-500 p-4 rounded-full border-4 border-red-900 md:mx-2 mt-2 md:mt-0">
+        <button
+          onClick={() => deleteHandler(review._id)}
+          className="bg-red-500 p-4 rounded-full border-4 border-red-900 md:mx-2 mt-2 md:mt-0"
+        >
           <AiFillDelete className="text-xl md:text-4xl ml-1 text-white hover:text-red-700"></AiFillDelete>
         </button>
       </div>
