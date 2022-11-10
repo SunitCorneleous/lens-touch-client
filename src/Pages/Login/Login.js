@@ -92,9 +92,6 @@ const Login = () => {
         const notify = () =>
           toast.success(`${result.user.displayName} logged in`);
         notify();
-
-        // navigate to right route
-        navigate(from, { replace: true });
       })
       .catch(error => {
         setLoading(false);

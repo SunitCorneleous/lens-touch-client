@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
 
   // logout user
   const logOutUser = () => {
-    setLoading(true);
+    localStorage.removeItem("lens-touch-token");
     return signOut(auth);
   };
 
