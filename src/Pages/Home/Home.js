@@ -2,6 +2,7 @@ import React from "react";
 import useTitle from "../../hooks/useTitle";
 import Carousel from "./Carousel";
 import HeroBanner from "./HeroBanner";
+import MoreInfo from "./MoreInfo";
 import ServicesList from "./ServicesList";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <HeroBanner></HeroBanner>
       <ServicesList></ServicesList>
       <Carousel></Carousel>
+      <MoreInfo></MoreInfo>
     </div>
   );
 };

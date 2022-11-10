@@ -6,7 +6,7 @@ import { BsArrowRightCircleFill, BsArrowLeftCircleFill } from "react-icons/bs";
 const Carousel = () => {
   const images = [
     "https://i.ibb.co/f0vJYwJ/card-img.jpg",
-    "https://i.ibb.co/f0vJYwJ/card-img.jpg",
+    "https://i.ibb.co/DDh1gGK/birthday.jpg",
     "https://i.ibb.co/L1kJK6g/concert.jpg",
     "https://i.ibb.co/3FqRQFd/community.jpg",
   ];
