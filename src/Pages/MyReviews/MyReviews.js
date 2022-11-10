@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../hooks/useTitle";
+import { homeSpinner } from "../Shared/Spinner";
 import MyReviewsCard from "./MyReviewsCard";
 
 const MyReviews = () => {
   const { user, logOutUser } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // // change title of route
   useTitle("My Reviews");
@@ -23,7 +25,10 @@ const MyReviews = () => {
         }
         return res.json();
       })
-      .then(data => setReviews(data));
+      .then(data => {
+        setReviews(data);
+        setLoading(false);
+      });
   }, [user.email, logOutUser]);
 
   // delete review
@@ -59,7 +64,9 @@ const MyReviews = () => {
   return (
     <div className="w-10/12 mt-14 mb-10 mx-auto" style={{ minHeight: "60vh" }}>
       <h1 className="text-2xl md:text-4xl text-center">Reviews added by me</h1>
-      {reviews.length > 0 ? (
+      {loading ? (
+        homeSpinner
+      ) : reviews.length > 0 ? (
         reviews?.map(review => (
           <MyReviewsCard
             key={review._id}

@@ -149,7 +149,7 @@ const Login = () => {
               type="submit"
               className="btn btn-primary mt-3 block mx-auto"
             >
-              {loading ? loadingSpinner : "loading"}
+              {loading ? loadingSpinner : "login"}
             </button>
           </form>
 
