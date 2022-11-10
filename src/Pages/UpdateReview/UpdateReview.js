@@ -29,6 +29,7 @@ const UpdateReview = () => {
       method: "PUT",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("lens-touch-token")}`,
       },
       body: JSON.stringify(newReview),
     })

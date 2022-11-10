@@ -38,6 +38,9 @@ const MyReviews = () => {
     if (confirmation) {
       fetch(`https://lens-touch-server.vercel.app/reviews/${review_id}`, {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("lens-touch-token")}`,
+        },
       })
         .then(res => res.json())
         .then(data => {
