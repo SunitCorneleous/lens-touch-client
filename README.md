@@ -28,3 +28,4 @@
 - React Icons
 - React Hot Toast
 - React Photo View
+- React Slideshow Image

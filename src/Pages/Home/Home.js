@@ -1,5 +1,6 @@
 import React from "react";
 import useTitle from "../../hooks/useTitle";
+import Carousel from "./Carousel";
 import HeroBanner from "./HeroBanner";
 import ServicesList from "./ServicesList";
 
@@ -11,6 +12,7 @@ const Home = () => {
     <div className="w-10/12 mx-auto">
       <HeroBanner></HeroBanner>
       <ServicesList></ServicesList>
+      <Carousel></Carousel>
     </div>
   );
 };
